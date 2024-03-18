@@ -1,4 +1,4 @@
-import { GenresData, SearchMultiData } from "./apiModels";
+import { GenresData, SearchMultiData } from "../app/models/apiModels";
 
 const baseUrl = "https://api.themoviedb.org/3";
 

@@ -1,19 +1,19 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Card, CardContent, CardHeader, Chip, CircularProgress, Divider, Stack, Typography } from "@mui/material";
-import { MovieResult } from "@/clients/apiModels";
-import { getMovieGenres } from "@/clients/tmdb";
+import { Genre, MovieResult } from "@/app/models/apiModels";
 
 export const MovieCard = async ({
   result,
+  genres
 }: {
   result: MovieResult;
+  genres: Array<Genre>;
 }) => {
 
-  const { genres: movieGenres } = await getMovieGenres();
   const movieGenreNames = result.genre_ids.map((genreId: number) => {
     let { name } =
-      movieGenres.find((currentGenre) => currentGenre.id === genreId) ?? {};
+    genres.find((currentGenre) => currentGenre.id === genreId) ?? {};
 
     return name;
   });

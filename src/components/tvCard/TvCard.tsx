@@ -1,19 +1,19 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Card, CardContent, CardHeader, Chip, CircularProgress, Divider, Stack, Typography } from "@mui/material";
-import { TvResult as TvResult } from "@/clients/apiModels";
-import { getTvGenres } from "@/clients/tmdb";
+import { Genre, TvResult as TvResult } from "@/app/models/apiModels";
 
 export const TvCard = async ({
   result,
+  genres
 }: {
   result: TvResult;
+  genres: Array<Genre>;
 }) => {
 
-  const { genres } = await getTvGenres();
-  const movieGenreNames = result.genre_ids.map((genreId: number) => {
+  const tvGenreNames = result.genre_ids.map((genreId: number) => {
     let { name } =
-      genres.find((currentGenre) => currentGenre.id === genreId) ?? {};
+    genres.find((currentGenre) => currentGenre.id === genreId) ?? {};
 
     return name;
   });
@@ -67,7 +67,7 @@ export const TvCard = async ({
           spacing={1}
           alignItems="center"
         >
-          {movieGenreNames.map((genreName) => (
+          {tvGenreNames.map((genreName) => (
             <Typography
               variant="body2"
               component="div"

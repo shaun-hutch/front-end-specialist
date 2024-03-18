@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Card, CardContent, CardHeader, Chip, CircularProgress, Divider, Stack, Typography } from "@mui/material";
-import { PersonResult, Result } from "@/clients/apiModels";
+import { PersonResult, Result } from "@/app/models/apiModels";
 
 export const PersonCard = async ({
   result,
