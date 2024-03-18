@@ -21,7 +21,7 @@ export default async function StarredPage({
       <TotalSearchResults searchParams={searchParams} />
       <Stack direction="column" spacing={4} my={4}>
         {results.map((result) => (
-          <SearchResultItem {...result} />
+          <SearchResultItem result={result} />
         ))}
       </Stack>
       <Box
