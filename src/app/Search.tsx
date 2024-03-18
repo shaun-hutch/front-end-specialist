@@ -17,6 +17,9 @@ export const Search = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const navigateToSearchResultsPage = () => {
+    if (searchQuery.trim().length === 0) {
+      return;
+    }
     router.push(`/search?q=${searchQuery}`);
   };
 

@@ -4,6 +4,12 @@ import { Search } from "@/app/Search";
 import mockRouter from "next-router-mock";
 
 describe("Search", () => {
+  test("Renders the component", () => {
+    const tree = render(<Search />);
+
+    expect(tree).toMatchSnapshot();
+  });
+
   test("Renders with a placeholder", () => {
     render(<Search />);
 
@@ -58,7 +64,23 @@ describe("Search", () => {
     });
   });
 
-  test.skip("User can not initiate a search with no search parameters", async () => {
+  test("User can not initiate a search with no search parameters", async () => {
+    const user = userEvent.setup();
+
+    render(<Search />);
+
+    const searchButton = screen.getByRole("button", { name: /search/i });
+
+    await user.click(searchButton);
+
+    expect(mockRouter).toMatchObject({
+      asPath: "/",
+      pathname: "/",
+      query: {},
+    });
+  });
+
+  test("User can not initiate a search with empty space search parameters", async () => {
     const user = userEvent.setup();
 
     render(<Search />);
@@ -68,6 +90,8 @@ describe("Search", () => {
     );
 
     const searchButton = screen.getByRole("button", { name: /search/i });
+
+    await user.type(input, "    ");
 
     await user.click(searchButton);
 
